@@ -55,7 +55,8 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["D:/Python/Kursach/src/main/templates/"],
+        'DIRS': ["D:/Python/Kursach/src/main/templates/",
+                 "D:/Python/Kursach/src/main/article/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    ['static', "D:/Python/Kursach/src/main/static"]
+]

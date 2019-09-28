@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+
+{% block article %}
+<div class="large-8 large-offset-1 columns">
+    {% for article in articles %}
+        <h4><a href="/articles/{{ article.id }}">{{ article.title }}</a></h4>
+        <p>{{ article.text }}</p>
+        <p><img src="{% static 'like.jpg' %}" width="20px" height="20px"> {{ article.likes }}</p>
+        <h6>Дата публикации: {{ article.date }}</h6>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}
