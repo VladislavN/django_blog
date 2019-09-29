@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'article',
+    'loginsys',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ["D:/Python/Kursach/src/main/templates/",
-                 "D:/Python/Kursach/src/main/article/templates/"],
+                 "D:/Python/Kursach/src/main/article/templates/",
+                 "D:/Python/Kursach/src/main/loginsys/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
