@@ -3,7 +3,7 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
 
 
 @csrf_protect
@@ -27,4 +27,20 @@ def logout(request):
     auth.logout(request)
     return redirect("/")
 
+
+@csrf_protect
+def register(request):
+    args = {"form": UserCreationForm()}
+    if request.POST:
+        new_user_form = UserCreationForm(request.POST)
+        if new_user_form.is_valid():
+            new_user_form.save()
+            new_user = auth.authenticate(
+                username=new_user_form.cleaned_data["username"],
+                password=new_user_form.cleaned_data["password2"])
+            auth.login(request, new_user)
+            return redirect("/")
+        else:
+            args["form"] = new_user_form
+    return render(request, "register.html", args)
 

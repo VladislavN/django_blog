@@ -6,4 +6,5 @@ import loginsys.views
 urlpatterns = [
     path('login/', loginsys.views.login),
     path('logout/', loginsys.views.logout),
+    path('register/', loginsys.views.register),
 ]

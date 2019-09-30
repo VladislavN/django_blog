@@ -9,4 +9,5 @@ urlpatterns = [
     path('articles/<int:article_id>/', article.views.article),
     path('articles/addlike/<int:article_id>/', article.views.add_like),
     path('articles/addcomment/<int:article_id>/', article.views.add_comment),
+    path('page/<int:page_number>/', article.views.articles),
 ]

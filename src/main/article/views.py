@@ -3,14 +3,18 @@ from django.template.loader import get_template
 from django.shortcuts import render_to_response, redirect, render
 from article.models import Article, Comments
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 from article.forms import CommentForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import auth
 
 
-def articles(request):
+def articles(request, page_number=1):
+    all_articles = Article.objects.all()
+    # TODO: change cur_page
+    current_page = Paginator(all_articles, 2)
     return render_to_response("articles.html", {
-        "articles": Article.objects.all(),
+        "articles": current_page.page(page_number),
         "username": auth.get_user(request).username})
 
 
