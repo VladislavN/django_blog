@@ -4,12 +4,13 @@
     <h4>Дата публикации: {{ article.date }}</h4>
     <h2>{{ article.title }}</h2>
     <p>{{ article.text }}</p>
-    <p> Понравилось:{{ article.likes }}</p>
     <hr>
     <div class="large-offset-1 large-8 columns">
         <h3>Комментарии:</h3>
         {% for comment in comments %}
             <p>{{ comment.text }}</p>
+            <p>{{ comment.from_user.username }}  {{ comment.date }}</p>
+            <hr>
         {% endfor %}
         {% if username %}
             <form action="/articles/addcomment/{{article.id}}/" method="post">

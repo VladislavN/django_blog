@@ -13,9 +13,11 @@ def articles(request, page_number=1):
     all_articles = Article.objects.all()
     # TODO: change cur_page
     current_page = Paginator(all_articles, 2)
-    return render_to_response("articles.html", {
+    response = render_to_response("articles.html", {
         "articles": current_page.page(page_number),
         "username": auth.get_user(request).username})
+    response.set_cookie("page_number", page_number)
+    return response
 
 
 @csrf_protect
@@ -29,17 +31,18 @@ def article(request, article_id=1):
 
 
 def add_like(request, article_id=1):
+    page_number = request.COOKIES.get("page_number", 1)
+    response = redirect(f"/page/{page_number}")
     try:
         if str(article_id) not in request.COOKIES:
             article = Article.objects.get(id=article_id)
             article.likes += 1
             article.save()
-            response = redirect("/")
             response.set_cookie(str(article_id), "add_like test")
             return response
     except ObjectDoesNotExist:
         raise Http404
-    return redirect("/")
+    return response
 
 
 def add_comment(request, article_id=1):
